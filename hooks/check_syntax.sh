@@ -21,7 +21,7 @@ do
 		case $indexfile in
 			*.pp )
 				# Check puppet manifest syntax
-				git cat-file blob :0:indexfile | puppet parser validate > $error_msg ;;
+				git cat-file blob :0:$indexfile | puppet parser validate > $error_msg ;;
 			*.erb )
 				# Check ERB template syntax
 				git cat-file blob :0:$indexfile | erb -x -T - | ruby -c 2> $error_msg > /dev/null ;;
