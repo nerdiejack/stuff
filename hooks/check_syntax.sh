@@ -37,7 +37,7 @@ done
 
 rm -f $error_msg
 
-if [ "syntax_errors" -ne 0 ]
+if [ "$syntax_errors" -ne 0 ]
 then
 	echo "Error: $syntax_errors syntax errors found, aborting commit."
 	exit 1
