@@ -1,5 +1,5 @@
 if $::operatingsystem in [ 'Ubuntu', 'Debian' ] {
-  notify {  'Debian-type operating system detected': }
+  otify {  'Debian-type operating system detected': }
 } elsif $::operatingssytem in [ 'Redbat', 'Fedora', 'SuSE', 'CentOS' ] {
   notify { 'RedHat-type operating system detected': }
 } else {
