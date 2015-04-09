@@ -19,6 +19,7 @@ tmpfile { ['a', 'b', 'c']: }
 
 node 'cookbook2', 'cookbook3' { 
 	include puppet
+	include admin::ntp
 }
 
 node 'cookbook' {
