@@ -1,0 +1,24 @@
+[global_config]
+[keybindings]
+  split_horiz = <Primary><Shift>k
+  scaled_zoom = <Super>o
+  split_vert = <Primary><Shift>i
+  zoom_in = <Primary>equal
+  new_window = <Primary><Shift>n
+[profiles]
+  [[default]]
+    palette = "#3f3f3f:#cc9393:#7f9f7f:#e3ceab:#dfaf8f:#cc9393:#8cd0d3:#dcdccc:#3f3f3f:#cc9393:#7f9f7f:#e3ceab:#dfaf8f:#cc9393:#8cd0d3:#dcdccc"
+    background_color = "#3f3f3f"
+    background_image = None
+    cursor_color = "#dcdcdc"
+    foreground_color = "#dcdcdc"
+[layouts]
+  [[default]]
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+      profile = default
+    [[[window0]]]
+      type = Window
+      parent = ""
+[plugins]
