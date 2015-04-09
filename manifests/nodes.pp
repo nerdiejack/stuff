@@ -6,6 +6,9 @@ if $::operatingsystem in [ 'Ubuntu', 'Debian' ] {
   notify { 'Some other operating system detcted': }
 }
 
+$class_c = regsubst($::ipaddress, '(.*)\..*', '\1.0')
+  notify { "The network part of ${::ipaddress} is ${class_c}": }
+
 node 'cookbook2', 'cookbook3' { 
 	include puppet
 }
