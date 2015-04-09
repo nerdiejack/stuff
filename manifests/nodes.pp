@@ -17,12 +17,23 @@ define tmpfile() {
 
 tmpfile { ['a', 'b', 'c']: }
 
-node 'cookbook2', 'cookbook3' { 
+node 'cookbook2' { 
 	include puppet
 	include admin::ntp
 }
 
-node 'cookbook' {
+node 'cookbook3' {
+  include puppet
+  include admin::ntp
+}
+
+node 'cookbook' inherits 'cookbook3' {
+  if tagged ('cookbook') {
+    notify { 'this will succeed': }
+  }
+  if tagged ('cookbook3') {
+    notify { 'so will this': }
+  }
   include memcached
   include puppet
   include admin::ntp
