@@ -28,7 +28,20 @@ node 'cookbook3' {
 }
 
 node 'cookbook' {
+  tag('big-server')
   include memcached
   include puppet
   include admin::ntp
+
+  if tagged('big-server') {
+    notify { 'Big server detected. Adding extra workload': }
+  }
+  
+  if tagged('admin::ntp') {
+    notify { 'This node is running NTP': }
+  }
+  
+  if tagged('admin') {
+    notify { 'This node includes at least one class from the admin module': }
+  }
 }
