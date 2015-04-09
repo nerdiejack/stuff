@@ -9,6 +9,14 @@ if $::operatingsystem in [ 'Ubuntu', 'Debian' ] {
 $class_c = regsubst($::ipaddress, '(.*)\..*', '\1.0')
   notify { "The network part of ${::ipaddress} is ${class_c}": }
 
+define tmpfile() {
+  file { "/tmp/${name}":
+    content => "Hello, world\n",
+  }
+}
+
+tmpfile { ['a', 'b', 'c']: }
+
 node 'cookbook2', 'cookbook3' { 
 	include puppet
 }
