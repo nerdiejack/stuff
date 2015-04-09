@@ -24,4 +24,5 @@ node 'cookbook2', 'cookbook3' {
 node 'cookbook' {
   include memcached
   include puppet
+  include admin::ntp
 }
