@@ -27,13 +27,7 @@ node 'cookbook3' {
   include admin::ntp
 }
 
-node 'cookbook' inherits 'cookbook3' {
-  if tagged ('cookbook') {
-    notify { 'this will succeed': }
-  }
-  if tagged ('cookbook3') {
-    notify { 'so will this': }
-  }
+node 'cookbook' {
   include memcached
   include puppet
   include admin::ntp
