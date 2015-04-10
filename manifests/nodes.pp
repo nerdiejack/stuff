@@ -45,6 +45,11 @@ node 'cookbook' {
   include puppet
   include admin::ntp
 
+  augeas { 'enable-ip-forwarding':
+    context => '/files/etc/sysctl.conf',
+    changes => ['set net.ipv4.ip_forward 1 '],
+  }
+
   if tagged('big-server') {
     notify { 'Big server detected. Adding extra workload': }
   }
