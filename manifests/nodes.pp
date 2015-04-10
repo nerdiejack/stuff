@@ -21,6 +21,12 @@ define append_if_no_such_line($file,$line) {
   }
 }
 
+define replace_machting_line($file,$match,$replace) {
+  exec { "/usr/bin/ruby -i -p -e 'sub(%r{$match}, \"$replace\")' ${file}":
+    onlyif => "/bin/grep -E '${match}' ${file}",
+  }
+} 
+
 tmpfile { ['a', 'b', 'c']: }
 
 node 'cookbook2' { 
@@ -51,8 +57,14 @@ node 'cookbook' {
     notify { 'This node includes at least one class from the admin module': }
   }
 
-  append_if_no_such_line { 'enable-ip-contrack':
-    file => '/etc/modules',
-    line => 'ip_conntrack',
+#  append_if_no_such_line { 'enable-ip-contrack':
+#    file => '/etc/modules',
+#    line => 'ip_conntrack',
+#  }
+
+  replace_machting_line { 'disable-ip-conntrack':
+    file    => '/etc/modules',
+    match   => '^ip_conntrack',
+    replace => '#ip_conntrack',
   }
 }
