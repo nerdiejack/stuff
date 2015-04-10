@@ -44,11 +44,19 @@ node 'cookbook' {
   include memcached
   include puppet
   include admin::ntp
+  include admin::rsyncdconf
 
   augeas { 'enable-ip-forwarding':
     context => '/files/etc/sysctl.conf',
     changes => ['set net.ipv4.ip_forward 1 '],
   }
+
+  file { '/etc/rsyncd.d/myapp.conf':
+    ensure  => present,
+    source  => 'puppet:///modules/admin/myapp.rsync',
+    require => File['/etc/rsyncd.d'],
+    notify  => Exec['update-rsyncd.conf'],
+  }    
 
   if tagged('big-server') {
     notify { 'Big server detected. Adding extra workload': }
