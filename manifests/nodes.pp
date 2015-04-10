@@ -15,6 +15,12 @@ define tmpfile() {
   }
 }
 
+define append_if_no_such_line($file,$line) {
+  exec { "/bin/echo '${line}' >> '${file}'":
+    unless => "/bin/grep -Fx '${line}' '${file}'",
+  }
+}
+
 tmpfile { ['a', 'b', 'c']: }
 
 node 'cookbook2' { 
@@ -43,5 +49,10 @@ node 'cookbook' {
   
   if tagged('admin') {
     notify { 'This node includes at least one class from the admin module': }
+  }
+
+  append_if_no_such_line { 'enable-ip-contrack':
+    file => '/etc/modules',
+    line => 'ip_conntrack',
   }
 }
