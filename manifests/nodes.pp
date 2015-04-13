@@ -46,6 +46,12 @@ node 'cookbook' {
   include admin::ntp
   include admin::rsyncdconf
 
+  $mysql_password = 'test'
+  file { '/usr/local/bin/backup-mysql':
+    content => template('admin/backup-mysql.sh.erb'),
+    mode    => '0755',
+  }
+
   augeas { 'enable-ip-forwarding':
     context => '/files/etc/sysctl.conf',
     changes => ['set net.ipv4.ip_forward 1 '],
