@@ -45,6 +45,12 @@ node 'cookbook' {
   include puppet
   include admin::ntp
   include admin::rsyncdconf
+  include admin::percona_repo
+
+  package { 'percona-server-server-5.5':
+    ensure  => installed,
+    require => Class['admin::percona_repo'],
+  }
 
   $message = secret('/root/puppet/modules/admin/files/secret_message.gpg')
     notify { "The secret message is: ${message}": }
