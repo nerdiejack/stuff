@@ -46,6 +46,13 @@ node 'cookbook' {
   include admin::ntp
   include admin::rsyncdconf
 
+  $ipaddresses = ['192.168.0.1',
+                  '158.43.128.1',
+                  '10.0.75.207']
+  file { '/tmp/addresslist.txt': 
+    content => template('admin/addresslist.erb')
+  }
+
   $mysql_password = 'test'
   file { '/usr/local/bin/backup-mysql':
     content => template('admin/backup-mysql.sh.erb'),
