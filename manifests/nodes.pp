@@ -46,6 +46,9 @@ node 'cookbook' {
   include admin::ntp
   include admin::rsyncdconf
 
+  $message = secret('/root/puppet/modules/admin/files/secret_message.gpg')
+    notify { "The secret message is: ${message}": }
+
   $ipaddresses = ['192.168.0.1',
                   '158.43.128.1',
                   '10.0.75.207']
