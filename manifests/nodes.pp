@@ -43,7 +43,7 @@ node 'cookbook3' {
 node 'vaio-box' {
   include puppet
   include admin::ntp
-  include admin::thunderbird
+  include thunderbird
 }
 
 node 'cookbook' {
