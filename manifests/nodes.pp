@@ -39,6 +39,11 @@ node 'cookbook3' {
   include admin::ntp
 }
 
+node 'vaio-box' {
+  include puppet
+  include admin::ntp
+}
+
 node 'cookbook' {
   tag('big-server')
   include memcached

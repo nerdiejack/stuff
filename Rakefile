@@ -1,5 +1,5 @@
 REPO = 'git@github.com:nerdiejack/stuff.git'
-SSH = 'ssh -p 32 -A -i /root/.ssh/id_rsa -l root'
+SSH = 'ssh -p 22 -A -i /root/.ssh/id_rsa -l root'
 
 desc "Bootstrap Puppet on ENV['CLIENT'] with hostname ENV['HOSTNAME']"
 task :bootstrap do
