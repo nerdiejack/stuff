@@ -17,7 +17,7 @@ class admin::percona_repo {
   }
 
   file { '/etc/apt/preferences.d/00percona.pref':
-    content => "Package: *\Pin: release o=Precona Development Team\nPin-Priority: 1001",
+    content => "Package: *\nPin: release o=Precona Development Team\nPin-Priority: 1001",
     notify  => Exec['percona-apt-update'],
   }
 } 
