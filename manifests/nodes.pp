@@ -30,16 +30,6 @@ define replace_machting_line($file,$match,$replace) {
 
 tmpfile { ['a', 'b', 'c']: }
 
-node 'cookbook2' { 
-	include puppet
-	include admin::ntp
-}
-
-node 'cookbook3' {
-  include puppet
-  include admin::ntp
-}
-
 node 'vaio-box' {
   include puppet
   include admin::ntp
@@ -53,6 +43,13 @@ node 'cookbook' {
   include admin::ntp
   include admin::rsyncdconf
   include admin::percona_repo
+
+  exec { 'install-httperf':
+    cwd     => '/root',
+    command => '/usr/bin/wget https://httperf.googlecode.com/files/httperf-0.9.0.tar.gz && /bin/tar xvzf httperf-0.9.0.tar.gz && cd httperf-0.9.0 && ./configure && make all && make install',
+    creates => '/usr/local/bin/httperf',
+    timeout => 0,
+  }
 
   package { 'percona-server-server-5.5':
     ensure  => installed,
