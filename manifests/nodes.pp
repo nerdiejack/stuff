@@ -43,6 +43,17 @@ node 'cookbook' {
   include admin::ntp
   include admin::rsyncdconf
   include admin::percona_repo
+  include app::facesquare
+  include app::flipr
+
+  $app_version = '1.2.14'
+  $min_version = '1.2.10'
+
+  if versioncmp($app_version, $min_version) >=0 {
+    notify { 'Version OK': }
+  } else {
+    notify { 'Upgrade needed': }
+  }
 
   exec { 'install-httperf':
     cwd     => '/root',
