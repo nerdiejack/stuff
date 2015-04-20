@@ -36,6 +36,11 @@ node 'vaio-box' {
   include thunderbird
 }
 
+node 'work-box' {
+  include puppet
+  include admin::ntp
+}
+
 node 'cookbook' {
   tag('big-server')
   include memcached

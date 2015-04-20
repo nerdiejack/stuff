@@ -8,7 +8,7 @@ task :bootstrap do
 	commands = <<BOOTSTRAP
 hostname #{hostname} && \
 wget http://apt.puppetlabs.com/puppetlabs-release-wheezy.deb && \
-dpkg -i puppetlabs-release-wheezy.deb && \
+dpkg -i puppetlabs-release-utopic.deb && \
 apt-get update && apt-get install -y git puppet && \
 git clone #{REPO} puppet && \
 puppet apply --modulepath=/root/puppet/modules /root/puppet/manifests/nodes.pp
