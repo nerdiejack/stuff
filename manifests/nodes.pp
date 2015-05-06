@@ -34,11 +34,18 @@ node 'vaio-box' {
   include puppet
   include admin::ntp
   include thunderbird
+
 }
 
 node 'work-box' {
   include puppet
   include admin::ntp
+
+  append_if_no_such_line { 'enable-ip-contrack':
+    file => '/etc/sudoers',
+    line => 'matthias_breer  ALL=NOPASSWD: ALL',
+  }
+
 }
 
 node 'cookbook' {
